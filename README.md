@@ -113,3 +113,25 @@ Incluir los resultados más relevantes de las pruebas.
 ## 9. Conclusiones
 
 Un resumen de los resultados obtenidos, lecciones aprendidas y recomendaciones para futuros proyectos.
+
+---
+
+## 10. Instalación de Apache Airflow usando Docker
+
+### Prerrequisitos:
+Antes de comenzar, asegúrate de tener instalados los siguientes componentes:
+- **Docker**: [Guía de instalación](https://docs.docker.com/get-docker/)
+- **Docker Compose**: [Guía de instalación](https://docs.docker.com/compose/install/)
+
+### Pasos para la instalación:
+
+1. **Clona el repositorio de Apache Airflow**:
+   Si no tienes ya un proyecto con Airflow, puedes empezar clonando el repositorio oficial de Airflow Docker Compose.
+   ```bash
+   git clone https://github.com/apache/airflow.git
+   cd airflow
+
+
+## 9. Conclusiones
+
+Un resumen de los resultados obtenidos, lecciones aprendidas y recomendaciones para futuros proyectos.
