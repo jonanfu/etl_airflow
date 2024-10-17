@@ -1,137 +1,144 @@
-# Documentación del Proyecto de Apache Airflow
+# Airflow DAG Documentation
 
-## 1. Descripción General del Proyecto
+## ARSMM_Dag
 
-**Nombre del proyecto**:  
-**Fecha de inicio**:  
-**Fecha de finalización**:  
-**Responsables**:  
+This DAG is responsible for the analysis of social media networks for a fashion brand. It extracts data from Facebook, Twitter, and Instagram APIs, performs a transformation to join the data, applies a pre-trained NLP model, and ingests the results into a database.
 
-### Objetivo:
-Describir el objetivo general del proyecto y lo que se espera lograr mediante el uso de Airflow.
+- **Start Date**: January 1, 2024
+- **Description**: Dag de Análisis de Redes Sociales para una Marca de Moda
+- **Tags**: Ingeniería
+- **Schedule Interval**: None (manual trigger)
 
-### Resumen:
-Proporcionar un resumen conciso sobre qué hace el proyecto, qué problemas resuelve y cómo Airflow contribuye al flujo de trabajo.
+### Tasks:
+- `extrac_facebook_api`: Simulates the extraction of data from Facebook API.
+- `extrac_tw_api`: Simulates the extraction of data from Twitter API.
+- `extrac_instagram_api`: Simulates the extraction of data from Instagram API.
+- `trans_join_data`: Dummy transformation task to join the data from all three platforms.
+- `consumo_modelo_nlp`: Simulates the consumption of an NLP model for further analysis.
+- `ingest_db`: Simulates the ingestion of the processed data into a database.
 
----
+## Dag_Branch
 
-## 2. Arquitectura del Proyecto
+This DAG simulates a sales analysis pipeline with a branching logic based on extracted data. If the extracted data exceeds a threshold, it transforms the data; otherwise, it predicts lost data.
 
-### Diagrama de la Arquitectura:
-Incluir un diagrama (puedes subir una imagen a este repositorio y enlazarla aquí).
+- **Start Date**: July 1, 2024
+- **Description**: Dag de ventas
+- **Tags**: Ingeniería
+- **Schedule Interval**: Daily
 
-### Componentes Principales:
-- **Base de Datos**: (PostgreSQL, MySQL, etc.)
-- **Herramientas de Ingestión**: (APIs, archivos CSV, S3, etc.)
-- **Plataformas de Destino**: (Data Warehouse, Data Lake, etc.)
+### Tasks:
+- `start`: Marks the beginning of the DAG.
+- `extract`: Extracts data and returns a random number to simulate data count.
+- `branch_task`: Directs the flow of execution based on the extracted data.
+- `transform1`: Transformation task when extracted data exceeds a threshold.
+- `predict_lost_data`: Predicts lost data if extraction returns a lower value.
+- `transform2`: Simulates a secondary transformation step.
+- `ingest`: Ingests data into a database.
+- `end`: Marks the end of the DAG.
 
----
+## Dag_Analitica_MKT
 
-## 3. Arquitectura del Workflow
+This DAG handles marketing analytics with the use of an external task sensor to wait for the successful execution of a task from another DAG before proceeding.
 
-### Diagrama del Workflow:
-Subir un diagrama que muestre la secuencia y las dependencias entre tareas. Puedes usar herramientas como **Lucidchart**, **Draw.io**, o incluso Airflow's **Graph View** para exportar el flujo.
+- **Start Date**: July 25, 2024
+- **Description**: Dag de Analítica y sensor
+- **Tags**: Ingeniería
+- **Schedule Interval**: Daily
 
-### Descripción del DAG:
-- **Nombre del DAG**: `nombre_del_dag`
-  - **Descripción**: Explicar qué hace el DAG y su función en el flujo de datos.
-  - **Dependencias**: Describir las dependencias entre las tareas del DAG.
-  - **Frecuencia de Ejecución**: `@daily`, `@hourly`, cron schedule, etc.
-  - **Sensores y Operadores**: Indicar el uso de sensores (si es relevante) y los operadores clave en cada tarea.
+### Tasks:
+- `start`: Marks the beginning of the DAG.
+- `sensor_DB_Ventas_Raw`: Waits for the successful completion of the `transform2` task from the `DG_Ventas` DAG.
+- `mkt_data`: Placeholder task for marketing data extraction.
+- `join_transform`: Joins and transforms data for further analysis.
+- `ingest`: Simulates data ingestion into a database.
+- `end`: Marks the end of the DAG.
 
-### Flujo de Datos:
-Explicar cómo los datos fluyen entre las tareas del DAG:
-1. **Origen de Datos**: (API, base de datos, etc.)
-2. **Transformaciones**: Operaciones sobre los datos (limpieza, agregación, etc.)
-3. **Destino**: Donde se guardan los resultados procesados (Data Warehouse, etc.)
+## Dag_Ventas
 
----
+This DAG simulates a sales data processing pipeline. It performs dummy transformations and ingests the data into multiple targets.
 
-## 4. Configuración del Entorno
+- **Start Date**: July 25, 2024
+- **Description**: Dag de ventas
+- **Tags**: Ingeniería
+- **Schedule Interval**: Daily
 
-### Versiones y Dependencias:
-- **Airflow version**: `x.x.x`
-- **Python version**: `3.x.x`
-- **Paquetes adicionales**: 
-  - `apache-airflow-providers-snowflake`
-  - `requests`
-  - Otros...
+### Tasks:
+- `start`: Marks the beginning of the DAG.
+- `extract`: Dummy task simulating data extraction.
+- `transform1`: First transformation step.
+- `transform2`: Executes a Bash command to simulate a transformation.
+- `ingest1`: First ingestion task.
+- `ingest2`: Second ingestion task.
+- `end`: Marks the end of the DAG.
 
-### Configuración del Airflow:
-- **Scheduler**: Configuración del scheduler.
-- **Executor**: Tipo de executor (`LocalExecutor`, `CeleryExecutor`, etc.).
-- **Conexiones**: Detallar las conexiones configuradas en la interfaz de Airflow (bases de datos, APIs, buckets S3, etc.).
+## DAG_ETL_Dummy
 
----
+This ETL DAG is a dummy implementation of an ETL pipeline that extracts data from two sources, joins them, and ingests the result into a PostgreSQL database.
 
-## 5. Detalles Técnicos
+- **Start Date**: Not specified
+- **Description**: Creación de DAG ETL Dummy
+- **Tags**: ETL, Ingeniería
+- **Schedule Interval**: None (manual trigger)
 
-### Tareas (Tasks):
-Para cada tarea dentro del DAG, describir:
-- **Nombre de la Tarea**: `nombre_de_la_tarea`
-  - **Operador utilizado**: `BashOperator`, `PythonOperator`, etc.
-  - **Descripción**: Qué hace la tarea y su importancia en el DAG.
-  - **Argumentos importantes**: Parámetros clave o variables de entorno.
+### Tasks:
+- `get_api_bash`: Simulates an API call using a Bash command.
+- `get_api_python`: Simulates an API call using Python.
+- `join_trans`: Joins and transforms the data from both sources.
+- `load_postgresSQL`: Ingests the data into a PostgreSQL database.
 
-### Manejo de Errores:
-- Estrategias implementadas para manejar fallos (reintentos, manejo de excepciones).
-- Configuración de alertas/notificaciones en caso de error (correo, Slack, etc.).
+## DAG_ETL_Postgres
 
----
+This ETL DAG extracts data from an API, joins it with data from a second source, and loads the transformed result into a PostgreSQL database. It includes an SQL operation to check the table structure before loading the data.
 
-## 6. Ejecución y Monitoreo
+- **Start Date**: Not specified
+- **Description**: Creación de DAG ETL PostgreSQL
+- **Tags**: ETL, Ingeniería, PostgreSQL
+- **Schedule Interval**: None (manual trigger)
 
-### Modo de Ejecución:
-- ¿Cómo se ejecuta el proyecto? (Local, Producción, Docker, Kubernetes, etc.).
+### Tasks:
+- `get_api_python`: Extracts data from an API using a Python script.
+- `get_api_bash`: Extracts data from an API using a Bash command.
+- `join_trans`: Joins and transforms the data from both extraction tasks.
+- `check_table`: Verifies the existence of the target table in the PostgreSQL database.
+- `load_data`: Loads the transformed data into the PostgreSQL database.
 
-### Monitoreo:
-- **Logs**: Describir dónde se almacenan los logs y cómo acceder a ellos.
-- **Alertas**: Configuración de alertas (correo, Slack, etc.).
-- **Métricas de Rendimiento**: Tiempo de ejecución de las tareas, porcentaje de éxito/fallo, etc.
+# Documentación de DAGs - Proyecto ETL Airflow
 
----
+Este documento describe los distintos DAGs (Directed Acyclic Graphs) implementados en Airflow para realizar tareas de extracción, transformación y carga (ETL) en diferentes sistemas.
 
-## 7. Pruebas
+## 1. DAG: MSPM_Dag
 
-### Estrategia de Pruebas:
-- **Pruebas Unitarias**: Describir las pruebas unitarias implementadas para cada tarea.
-- **Pruebas End-to-End**: Explicar cómo se prueban los DAGs completos.
+### Descripción
+Este DAG ejecuta un flujo de monitoreo de sensores en una planta de manufactura. Se ejecuta cada hora.
 
-### Resultados de Pruebas:
-Incluir los resultados más relevantes de las pruebas.
+### Configuración General
+- **Nombre del DAG**: `MSPM_Dag`
+- **Owner**: Codigo Facilito Team
+- **Schedule**: @hourly
+- **Fecha de Inicio**: 25 de julio de 2024
+- **Retries**: 1
+- **Retry Delay**: 2 minutos
+- **Tags**: ['Ingenieria']
 
----
+### Tareas
 
-## 8. Mejoras Futuras
+1. **start**: Marca el inicio del flujo de trabajo.
+2. **extract_sensor_data**: Agrupación de tareas para extraer datos de 30 sensores. Cada sensor ejecuta una función Python que imprime un mensaje de extracción.
+3. **ingest_db**: Ingresa los datos extraídos a la base de datos.
+4. **trans_in_db_analisis**: Realiza una transformación de datos para análisis.
+5. **email_supervisores**: Envía un correo a los supervisores con el estado de los sensores.
+6. **email_mantenimiento**: Envía un correo al equipo de mantenimiento.
+7. **update_dash_mantenimiento**: Actualiza el dashboard de mantenimiento.
+8. **update_dash_produccion**: Actualiza el dashboard de producción.
+9. **end**: Marca el fin del flujo de trabajo.
 
-- **Optimización**: Áreas donde se pueden mejorar tiempos de ejecución o recursos.
-- **Escalabilidad**: Cómo se podría escalar el flujo de trabajo para procesar más datos.
-- **Nuevas Funcionalidades**: Posibles DAGs o tareas adicionales a incluir en el futuro.
+### Flujo de Ejecución
 
----
-
-## 9. Conclusiones
-
-Un resumen de los resultados obtenidos, lecciones aprendidas y recomendaciones para futuros proyectos.
-
----
-
-## 10. Instalación de Apache Airflow usando Docker
-
-### Prerrequisitos:
-Antes de comenzar, asegúrate de tener instalados los siguientes componentes:
-- **Docker**: [Guía de instalación](https://docs.docker.com/get-docker/)
-- **Docker Compose**: [Guía de instalación](https://docs.docker.com/compose/install/)
-
-### Pasos para la instalación:
-
-1. **Clona el repositorio de Apache Airflow**:
-   Si no tienes ya un proyecto con Airflow, puedes empezar clonando el repositorio oficial de Airflow Docker Compose.
-   ```bash
-   git clone https://github.com/apache/airflow.git
-   cd airflow
+```mermaid
+graph LR
+    start --> extract_sensor_data --> ingest_db --> trans_in_db_analisis --> email_supervisores --> end
+    trans_in_db_analisis --> email_mantenimiento --> end
+    trans_in_db_analisis --> update_dash_mantenimiento --> end
+    trans_in_db_analisis --> update_dash_produccion --> end
 
 
-## 9. Conclusiones
-
-Un resumen de los resultados obtenidos, lecciones aprendidas y recomendaciones para futuros proyectos.
