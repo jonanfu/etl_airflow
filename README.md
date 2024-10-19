@@ -102,43 +102,42 @@ This ETL DAG extracts data from an API, joins it with data from a second source,
 - `check_table`: Verifies the existence of the target table in the PostgreSQL database.
 - `load_data`: Loads the transformed data into the PostgreSQL database.
 
-# Documentación de DAGs - Proyecto ETL Airflow
+## MSPM_Dag
 
-Este documento describe los distintos DAGs (Directed Acyclic Graphs) implementados en Airflow para realizar tareas de extracción, transformación y carga (ETL) en diferentes sistemas.
+Este DAG realiza el monitoreo de sensores para una planta de manufactura. Extrae datos de 30 sensores y envía alertas y actualizaciones de dashboards.
 
-## 1. DAG: MSPM_Dag
-
-### Descripción
-Este DAG ejecuta un flujo de monitoreo de sensores en una planta de manufactura. Se ejecuta cada hora.
-
-### Configuración General
-- **Nombre del DAG**: `MSPM_Dag`
-- **Owner**: Codigo Facilito Team
-- **Schedule**: @hourly
 - **Fecha de Inicio**: 25 de julio de 2024
-- **Retries**: 1
-- **Retry Delay**: 2 minutos
-- **Tags**: ['Ingenieria']
+- **Descripción**: Dag de Monitoreo de Sensores para una Planta de Manufactura
+- **Etiquetas**: Ingeniería
+- **Intervalo de Programación**: Cada hora
 
-### Tareas
+### Tareas:
+- `start`: Marca el inicio del DAG.
+- `extract_sensor_data`: Extrae datos de 30 sensores.
+- `ingest_db`: Ingresa los datos en una base de datos.
+- `trans_in_db_analisis`: Realiza un análisis dentro de la base de datos.
+- `email_supervisores`: Envía un correo electrónico a los supervisores.
+- `email_mantenimiento`: Envía un correo electrónico al equipo de mantenimiento.
+- `update_dash_mantenimiento`: Actualiza el dashboard de mantenimiento.
+- `update_dash_produccion`: Actualiza el dashboard de producción.
+- `end`: Marca el final del DAG.
 
-1. **start**: Marca el inicio del flujo de trabajo.
-2. **extract_sensor_data**: Agrupación de tareas para extraer datos de 30 sensores. Cada sensor ejecuta una función Python que imprime un mensaje de extracción.
-3. **ingest_db**: Ingresa los datos extraídos a la base de datos.
-4. **trans_in_db_analisis**: Realiza una transformación de datos para análisis.
-5. **email_supervisores**: Envía un correo a los supervisores con el estado de los sensores.
-6. **email_mantenimiento**: Envía un correo al equipo de mantenimiento.
-7. **update_dash_mantenimiento**: Actualiza el dashboard de mantenimiento.
-8. **update_dash_produccion**: Actualiza el dashboard de producción.
-9. **end**: Marca el fin del flujo de trabajo.
+---
 
-### Flujo de Ejecución
+## SRP_Dag
 
-```mermaid
-graph LR
-    start --> extract_sensor_data --> ingest_db --> trans_in_db_analisis --> email_supervisores --> end
-    trans_in_db_analisis --> email_mantenimiento --> end
-    trans_in_db_analisis --> update_dash_mantenimiento --> end
-    trans_in_db_analisis --> update_dash_produccion --> end
+Este DAG implementa un sistema de recomendación de películas. Extrae datos de bases de datos internas y APIs externas, los combina y pasa el resultado a un modelo de machine learning.
 
+- **Fecha de Inicio**: 1 de enero de 2024
+- **Descripción**: Dag de Sistema de Recomendación de Películas
+- **Etiquetas**: Ingeniería
+- **Intervalo de Programación**: Mensual
+
+### Tareas:
+- `extrac_db_inter`: Extrae datos de bases de datos internas.
+- `extrac_api`: Extrae datos de una API externa.
+- `trans_join_data`: Combina y transforma los datos.
+- `consumo_modelo_ml_api`: Consume un modelo de machine learning para generar recomendaciones.
+- `send_email`: Envía correos con los resultados.
+- `ingest_db`: Ingresa los resultados en una base de datos.
 
