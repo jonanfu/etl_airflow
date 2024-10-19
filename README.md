@@ -1,106 +1,106 @@
-# Airflow DAG Documentation
+# Documentación del DAG de Airflow
 
 ## ARSMM_Dag
 
-This DAG is responsible for the analysis of social media networks for a fashion brand. It extracts data from Facebook, Twitter, and Instagram APIs, performs a transformation to join the data, applies a pre-trained NLP model, and ingests the results into a database.
+Este DAG es responsable del análisis de redes sociales para una marca de moda. Extrae datos de las APIs de Facebook, Twitter e Instagram, realiza una transformación para unir los datos, aplica un modelo de NLP preentrenado e ingresa los resultados en una base de datos.
 
-- **Start Date**: January 1, 2024
-- **Description**: Dag de Análisis de Redes Sociales para una Marca de Moda
-- **Tags**: Ingeniería
-- **Schedule Interval**: None (manual trigger)
+- **Fecha de Inicio**: 1 de enero de 2024
+- **Descripción**: Dag de Análisis de Redes Sociales para una Marca de Moda
+- **Etiquetas**: Ingeniería
+- **Intervalo de Programación**: Ninguno (activación manual)
 
-### Tasks:
-- `extrac_facebook_api`: Simulates the extraction of data from Facebook API.
-- `extrac_tw_api`: Simulates the extraction of data from Twitter API.
-- `extrac_instagram_api`: Simulates the extraction of data from Instagram API.
-- `trans_join_data`: Dummy transformation task to join the data from all three platforms.
-- `consumo_modelo_nlp`: Simulates the consumption of an NLP model for further analysis.
-- `ingest_db`: Simulates the ingestion of the processed data into a database.
+### Tareas:
+- extrac_facebook_api: Simula la extracción de datos desde la API de Facebook.
+- extrac_tw_api: Simula la extracción de datos desde la API de Twitter.
+- extrac_instagram_api: Simula la extracción de datos desde la API de Instagram.
+- trans_join_data: Tarea de transformación ficticia para unir los datos de las tres plataformas.
+- consumo_modelo_nlp: Simula el consumo de un modelo de NLP para análisis adicional.
+- ingest_db: Simula la ingesta de los datos procesados en una base de datos.
 
 ## Dag_Branch
 
-This DAG simulates a sales analysis pipeline with a branching logic based on extracted data. If the extracted data exceeds a threshold, it transforms the data; otherwise, it predicts lost data.
+Este DAG simula un pipeline de análisis de ventas con lógica de bifurcación basada en los datos extraídos. Si los datos extraídos superan un umbral, se transforman; de lo contrario, se predicen los datos perdidos.
 
-- **Start Date**: July 1, 2024
-- **Description**: Dag de ventas
-- **Tags**: Ingeniería
-- **Schedule Interval**: Daily
+- **Fecha de Inicio**: 1 de julio de 2024
+- **Descripción**: Dag de ventas
+- **Etiquetas**: Ingeniería
+- **Intervalo de Programación**: Diario
 
-### Tasks:
-- `start`: Marks the beginning of the DAG.
-- `extract`: Extracts data and returns a random number to simulate data count.
-- `branch_task`: Directs the flow of execution based on the extracted data.
-- `transform1`: Transformation task when extracted data exceeds a threshold.
-- `predict_lost_data`: Predicts lost data if extraction returns a lower value.
-- `transform2`: Simulates a secondary transformation step.
-- `ingest`: Ingests data into a database.
-- `end`: Marks the end of the DAG.
+### Tareas:
+- start: Marca el inicio del DAG.
+- extract: Extrae datos y devuelve un número aleatorio para simular el conteo de datos.
+- branch_task: Dirige el flujo de ejecución según los datos extraídos.
+- transform1: Tarea de transformación cuando los datos extraídos superan un umbral.
+- predict_lost_data: Predice datos perdidos si la extracción devuelve un valor bajo.
+- transform2: Simula un segundo paso de transformación.
+- ingest: Ingresa los datos en una base de datos.
+- end: Marca el final del DAG.
 
 ## Dag_Analitica_MKT
 
-This DAG handles marketing analytics with the use of an external task sensor to wait for the successful execution of a task from another DAG before proceeding.
+Este DAG maneja la analítica de marketing con el uso de un sensor de tarea externa que espera la ejecución exitosa de una tarea de otro DAG antes de continuar.
 
-- **Start Date**: July 25, 2024
-- **Description**: Dag de Analítica y sensor
-- **Tags**: Ingeniería
-- **Schedule Interval**: Daily
+- **Fecha de Inicio**: 25 de julio de 2024
+- **Descripción**: Dag de Analítica y sensor
+- **Etiquetas**: Ingeniería
+- **Intervalo de Programación**: Diario
 
-### Tasks:
-- `start`: Marks the beginning of the DAG.
-- `sensor_DB_Ventas_Raw`: Waits for the successful completion of the `transform2` task from the `DG_Ventas` DAG.
-- `mkt_data`: Placeholder task for marketing data extraction.
-- `join_transform`: Joins and transforms data for further analysis.
-- `ingest`: Simulates data ingestion into a database.
-- `end`: Marks the end of the DAG.
+### Tareas:
+- start: Marca el inicio del DAG.
+- sensor_DB_Ventas_Raw: Espera la finalización exitosa de la tarea transform2 del DAG DG_Ventas.
+- mkt_data: Tarea reservada para la extracción de datos de marketing.
+- join_transform: Une y transforma los datos para análisis adicional.
+- ingest: Simula la ingesta de datos en una base de datos.
+- end: Marca el final del DAG.
 
 ## Dag_Ventas
 
-This DAG simulates a sales data processing pipeline. It performs dummy transformations and ingests the data into multiple targets.
+Este DAG simula un pipeline de procesamiento de datos de ventas. Realiza transformaciones ficticias y los datos son ingresados en múltiples destinos.
 
-- **Start Date**: July 25, 2024
-- **Description**: Dag de ventas
-- **Tags**: Ingeniería
-- **Schedule Interval**: Daily
+- **Fecha de Inicio**: 25 de julio de 2024
+- **Descripción**: Dag de ventas
+- **Etiquetas**: Ingeniería
+- **Intervalo de Programación**: Diario
 
-### Tasks:
-- `start`: Marks the beginning of the DAG.
-- `extract`: Dummy task simulating data extraction.
-- `transform1`: First transformation step.
-- `transform2`: Executes a Bash command to simulate a transformation.
-- `ingest1`: First ingestion task.
-- `ingest2`: Second ingestion task.
-- `end`: Marks the end of the DAG.
+### Tareas:
+- start: Marca el inicio del DAG.
+- extract: Tarea ficticia que simula la extracción de datos.
+- transform1: Primer paso de transformación.
+- transform2: Ejecuta un comando Bash para simular una transformación.
+- ingest1: Primera tarea de ingesta.
+- ingest2: Segunda tarea de ingesta.
+- end: Marca el final del DAG.
 
 ## DAG_ETL_Dummy
 
-This ETL DAG is a dummy implementation of an ETL pipeline that extracts data from two sources, joins them, and ingests the result into a PostgreSQL database.
+Este DAG ETL es una implementación ficticia de un pipeline ETL que extrae datos de dos fuentes, los une e ingresa el resultado en una base de datos PostgreSQL.
 
-- **Start Date**: Not specified
-- **Description**: Creación de DAG ETL Dummy
-- **Tags**: ETL, Ingeniería
-- **Schedule Interval**: None (manual trigger)
+- **Fecha de Inicio**: No especificada
+- **Descripción**: Creación de DAG ETL Dummy
+- **Etiquetas**: ETL, Ingeniería
+- **Intervalo de Programación**: Ninguno (activación manual)
 
-### Tasks:
-- `get_api_bash`: Simulates an API call using a Bash command.
-- `get_api_python`: Simulates an API call using Python.
-- `join_trans`: Joins and transforms the data from both sources.
-- `load_postgresSQL`: Ingests the data into a PostgreSQL database.
+### Tareas:
+- get_api_bash: Simula una llamada a API usando un comando Bash.
+- get_api_python: Simula una llamada a API usando Python.
+- join_trans: Une y transforma los datos de ambas fuentes.
+- load_postgresSQL: Ingresa los datos en una base de datos PostgreSQL.
 
 ## DAG_ETL_Postgres
 
-This ETL DAG extracts data from an API, joins it with data from a second source, and loads the transformed result into a PostgreSQL database. It includes an SQL operation to check the table structure before loading the data.
+Este DAG ETL extrae datos de una API, los une con datos de una segunda fuente y carga el resultado transformado en una base de datos PostgreSQL. Incluye una operación SQL para verificar la estructura de la tabla antes de cargar los datos.
 
-- **Start Date**: Not specified
-- **Description**: Creación de DAG ETL PostgreSQL
-- **Tags**: ETL, Ingeniería, PostgreSQL
-- **Schedule Interval**: None (manual trigger)
+- **Fecha de Inicio**: No especificada
+- **Descripción**: Creación de DAG ETL PostgreSQL
+- **Etiquetas**: ETL, Ingeniería, PostgreSQL
+- **Intervalo de Programación**: Ninguno (activación manual)
 
-### Tasks:
-- `get_api_python`: Extracts data from an API using a Python script.
-- `get_api_bash`: Extracts data from an API using a Bash command.
-- `join_trans`: Joins and transforms the data from both extraction tasks.
-- `check_table`: Verifies the existence of the target table in the PostgreSQL database.
-- `load_data`: Loads the transformed data into the PostgreSQL database.
+### Tareas:
+- get_api_python: Extrae datos de una API usando un script en Python.
+- get_api_bash: Extrae datos de una API usando un comando Bash.
+- join_trans: Une y transforma los datos de ambas tareas de extracción.
+- check_table: Verifica la existencia de la tabla destino en la base de datos PostgreSQL.
+- load_data: Carga los datos transformados en la base de datos PostgreSQL.
 
 ## MSPM_Dag
 
