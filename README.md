@@ -141,3 +141,27 @@ Este DAG implementa un sistema de recomendación de películas. Extrae datos de 
 - `send_email`: Envía correos con los resultados.
 - `ingest_db`: Ingresa los resultados en una base de datos.
 
+## DAG: Marketing_ETL_DAG
+
+Este DAG maneja la extracción, transformación y carga (ETL) de datos de diversas plataformas de marketing (Google Ads, Facebook Ads, YouTube Ads) hacia Google Cloud Storage (GCS) y BigQuery.
+
+- **Fecha de Inicio**: `None`
+- **Descripción**: `Dag de Marketing ETL`
+- **Etiquetas**: `Ingeniería`, `Marketing`
+- **Plataformas de Datos**:
+  - Google Ads
+  - Facebook Ads
+  - YouTube Ads
+- **Procesos**:
+  1. Extracción de datos desde las plataformas de marketing.
+  2. Transformación y limpieza de los datos.
+  3. Carga de los datos en GCS.
+  4. Almacenamiento de los resultados finales en BigQuery.
+- **Dependencias**:
+  - Google Cloud SDK
+  - BigQuery API
+  - Cloud Storage API
+- **Frecuencia de Ejecución**: Diaria
+- **Ubicación del código**: `./dags/Marketing_ETL_DAG.py`
+
+---
