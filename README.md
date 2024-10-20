@@ -1,5 +1,48 @@
 # Documentación del DAG de Airflow
 
+Clonar el Repositorio: Abre tu terminal y clona el repositorio utilizando el siguiente comando:
+
+bash
+
+git clone https://github.com/jonanfu/etl_airflow.git
+
+Navegar al Directorio del Proyecto: Cambia al directorio del proyecto clonado:
+
+``bash
+
+cd etl_airflow
+
+Instalar Docker y Docker Compose: Asegúrate de tener Docker y Docker Compose instalados en tu sistema. Puedes seguir las instrucciones de instalación en los siguientes enlaces:
+
+    Docker
+    Docker Compose
+
+Construir y Levantar el Contenedor: Utiliza Docker Compose para construir y levantar el contenedor con el siguiente comando:
+
+```bash
+
+docker-compose up --build
+```
+Acceder a la Interfaz Web de Airflow: Una vez que el contenedor esté en funcionamiento, accede a la interfaz web de Airflow en tu navegador en la siguiente URL:
+
+
+```http
+http://localhost:8080
+```
+Iniciar Sesión: Usa las credenciales predeterminadas:
+
+    Usuario: airflow
+    Contraseña: airflow
+
+Verificar los DAGs: En la interfaz de Airflow, deberías ver los DAGs listados en la página principal. Puedes activarlos y monitorear su ejecución desde allí.
+
+Detener el Contenedor: Para detener el contenedor cuando hayas terminado, puedes usar:
+
+```bash
+
+docker-compose down
+
+```
 ## ARSMM_Dag
 
 Este DAG es responsable del análisis de redes sociales para una marca de moda. Extrae datos de las APIs de Facebook, Twitter e Instagram, realiza una transformación para unir los datos, aplica un modelo de NLP preentrenado e ingresa los resultados en una base de datos.
