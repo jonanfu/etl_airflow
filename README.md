@@ -2,10 +2,11 @@
 
 Clonar el Repositorio: Abre tu terminal y clona el repositorio utilizando el siguiente comando:
 
-bash
+```bash
 
 git clone https://github.com/jonanfu/etl_airflow.git
 
+```
 Navegar al Directorio del Proyecto: Cambia al directorio del proyecto clonado:
 
 ```bash
@@ -14,8 +15,8 @@ cd etl_airflow
 ```
 Instalar Docker y Docker Compose: Asegúrate de tener Docker y Docker Compose instalados en tu sistema. Puedes seguir las instrucciones de instalación en los siguientes enlaces:
 
-    Docker
-    Docker Compose
+[Docker](https://docs.docker.com/engine/install/)
+[Docker Compose](https://docs.docker.com/compose/install/)
 
 Construir y Levantar el Contenedor: Utiliza Docker Compose para construir y levantar el contenedor con el siguiente comando:
 
