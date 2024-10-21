@@ -16,6 +16,7 @@ cd etl_airflow
 Instalar Docker y Docker Compose: Asegúrate de tener Docker y Docker Compose instalados en tu sistema. Puedes seguir las instrucciones de instalación en los siguientes enlaces:
 
 [Docker](https://docs.docker.com/engine/install/)
+
 [Docker Compose](https://docs.docker.com/compose/install/)
 
 Construir y Levantar el Contenedor: Utiliza Docker Compose para construir y levantar el contenedor con el siguiente comando:
@@ -27,9 +28,9 @@ docker-compose up --build
 Acceder a la Interfaz Web de Airflow: Una vez que el contenedor esté en funcionamiento, accede a la interfaz web de Airflow en tu navegador en la siguiente URL:
 
 
-```http
+`
 http://localhost:8080
-```
+`
 Iniciar Sesión: Usa las credenciales predeterminadas:
 
     Usuario: airflow
