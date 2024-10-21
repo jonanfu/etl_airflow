@@ -8,10 +8,10 @@ git clone https://github.com/jonanfu/etl_airflow.git
 
 Navegar al Directorio del Proyecto: Cambia al directorio del proyecto clonado:
 
-``bash
+```bash
 
 cd etl_airflow
-
+```
 Instalar Docker y Docker Compose: Asegúrate de tener Docker y Docker Compose instalados en tu sistema. Puedes seguir las instrucciones de instalación en los siguientes enlaces:
 
     Docker
