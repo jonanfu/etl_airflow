@@ -31,6 +31,7 @@ Acceder a la Interfaz Web de Airflow: Una vez que el contenedor esté en funcion
 `
 http://localhost:8080
 `
+
 Iniciar Sesión: Usa las credenciales predeterminadas:
 
     Usuario: airflow
